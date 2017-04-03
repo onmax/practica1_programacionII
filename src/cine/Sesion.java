@@ -1,5 +1,7 @@
 package cine;
 
+//@Programacion2(nombreAutor1 = "Máximo", apellidoAutor1 = "García Martínez", emailUPMAutor1 = "maximo.garcia.martinez@alumnos.upm.es", 
+//				nombreAutor2 = "Javier", apellidoAutor2 = "Barragan Haro", emailUPMAutor2 = "javier.barrragan.haro@alumnos.upm.es");
 public class Sesion {
 	private String hora;
 	// hora de la sesión en formato HH:MM
@@ -29,19 +31,17 @@ public class Sesion {
 	
 	public boolean equals(Sesion obj){
 		//método que compara el objeto de tipo Sesion dado con la propia sesión, y devuelve cierto si son iguales y falso en caso contrario. Se considera que dos sesiones son iguales si son iguales sus atributos hora.  
-		if(this.hora.equals(obj.getHora())){
-			return true;
-		}else{
-			return false;
-		}
+		return obj.getHora() == this.hora;
 	}
 	
 	public void comprarEntrada(int fila, int columna){
 	//método que compra una entrada con la fila y columna dadas para la propia sesión. Para registrar la venta, se guarda el valor actual del atributo sigIdCompra en la posición 
 	//(fila-1, columna-1) del atributo estadoAsientos. A continuación, se incrementa en uno el atributo sigIdCompra.
-		this.estadoAsientos[fila - 1][columna - 1]= sigIdCompra;
-		this.sigIdCompra += 1;
-		this.asientosDisponibles -= 1;
+		if(estadoAsientos[fila - 1][columna - 1] == 0){
+			this.estadoAsientos[fila - 1][columna - 1]= sigIdCompra;
+			this.sigIdCompra += 1;
+			this.asientosDisponibles -= 1;
+		}
 	}
 	
 	public int getIdEntrada(int fila, int columna){
@@ -57,10 +57,10 @@ public class Sesion {
 		char res [][] = new char[this.estadoAsientos.length][this.estadoAsientos[0].length];
 		for(int i= 0; i<this.estadoAsientos.length; i++){
 			for (int j = 0; j< this.estadoAsientos[i].length;j++){
-				if(this.estadoAsientos[i][j] > 0){
-					res[i][j] = '#';
-				}else{
+				if(this.estadoAsientos[i][j] == 0){
 					res[i][j] = 'O';
+				}else{
+					res[i][j] = '#';
 				}
 			}
 		}
@@ -94,7 +94,7 @@ public class Sesion {
 			for (int j = 0; j< this.estadoAsientos[i].length;j++){
 				if(this.estadoAsientos[i][j] == id){
 					bool = true;
-					res += i + "," + j + "+";
+					res += i+1 + "," + j+1 + "+";
 				}
 			}
 		}
@@ -111,14 +111,36 @@ public class Sesion {
 	//empezando por la columna N_COLUMNAS y acabando en la columna 1. 2. Si en el paso anterior no se encuentran N butacas contiguas libres, se buscan las primeras N butacas contiguas libres empezando por la fila 
 	//(N_FILAS+1)/2 y acabando en la fila 1. Cada fila se recorre empezando por la columna N_COLUMNAS y acabando en la columna 1. Si no existen N butacas libres contiguas en la sala para la propia sesión, se devuelve null.
 	//Por ejemplo, si tomamos la sala de la figura 2 y buscamos 3 butacas contiguas libres, este algoritmo devolverá las butacas (4, 3), (4, 4) y (4, 5).
-		ButacasContiguas recomendadas = new ButacasContiguas(1,2,3);
-		return recomendadas;
+		int filas = (estadoAsientos.length/2) + 1;
+		int columnas = estadoAsientos[0].length - 1;
+		int cont = 0;
+		boolean bool = false;
+		ButacasContiguas butacas;
+		while(!bool && cont < estadoAsientos.length){
+			int aux = 0;
+			for(int i = 0; i>=0; i--){
+				if(estadoAsientos[filas][i] == 0 && aux - noButacas >= 0){
+					aux += 1;
+					if(aux == noButacas){
+						butacas = new ButacasContiguas(filas, i, noButacas);
+						bool = true;
+					}
+				}
+			}
+			if(filas == estadoAsientos.length - 1){
+				filas = 0;
+				cont ++;
+			}else{
+				filas ++;
+				cont ++;
+			}
+			
+		}
+		
 	}
 	
 	public void comprarEntradasRecomendadas(ButacasContiguas butacas){
 	//método que dado un objeto de tipo ButacasContiguas, registra la compra en la propia sesión guardando el valor actual del atributo sigIdCompra en las posiciones especificadas por el objeto dado como argumento. 
 	//A continuación, se incrementa en uno el atributo sigIdCompra. 
 	}
-	
-	
 }
