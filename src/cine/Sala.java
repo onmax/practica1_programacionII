@@ -1,76 +1,110 @@
-package cine;
-import list.ArrayList;
-
-
 public class Sala {
 	private String pelicula;
-	// título de la película. 
 	private ArrayList<Sesion> sesion;
-	//son las sesiones en las que se proyecta la película en esta sala representadas por un arraylist de objetos de tipo Sesion. El arraylist estará ordenado de menor a mayor por la hora de la sesión. 
-	
-	public Sala(String pelicula, String [] horasSesiones, int filas, int columnas){
-	//constructor de la clase Sala que recibe como argumentos el título de la película, un vector de String con las horas de las sesiones de esta sala, y el número de filas y 
-	//columnas de la sala. Con estos argumentos, inicializa los atributos del objeto.
+
+	public Sala(String pelicula, String[] horasSesiones, int filas, int columnas) {
 		this.pelicula = pelicula;
+		this.sesion = new ArrayList<Sesion>();
+		for (int i = 0; i < horasSesiones.length; i++) {
+			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
+			sesion.add(i, aux);
+		}
 	}
-	
-	public void comprarEntrada(int sesion, int fila, int columna){
-	// método que compra una entrada con la fila y columna dadas para sesión dada de la propia sala. La compra queda registrada en el objeto de tipo Sesion correspondiente
+
+	public String getSesion() {
+		String res = "";
+		for (int i = 0; i < this.sesion.size(); i++) {
+			res += this.sesion.get(i).getHora() + "\n";
+		}
+		return res;
 	}
-	
-	public int getIdEntrada(int sesion, int fila, int columna){
-	//método que devuelve el identificador de venta para una entrada en la propia sala especificada mediante su sesión, fila y columna. El algoritmo para obtener este identificador 
-	//se explica en la especificación del método con el mismo nombre en la clase Sesion.
-		return 0;
+
+	public void comprarEntrada(int sesion, int fila, int columna) {
+		Sesion aux = this.sesion.get(sesion);
+		aux.comprarEntrada(fila, columna);
 	}
-	
-	public String [] getHorasDeSesionesDeSala(){
-	// método que devuelve un vector de String con las horas de las sesiones asociadas a la propia sala. En la posición 0 del vector se encontrará la hora de la sesión 1, en la posición 1
-	//la de la sesión 2, y así sucesivamente.
-		String [] y = new String[1];
-		return y;
+
+	public int getIdEntrada(int sesion, int fila, int columna) {
+		return this.sesion.get(sesion).getIdEntrada(fila, columna);
 	}
-	
-	public char [][] getEstadoSesion(int sesion){
-	// método que devuelve una matriz de caracteres en la que se representa el estado de ocupación de la propia sala para una sesión dada. El contenido de esta matriz se especifica en el método 
-	//con el mismo nombre de la clase Sesion.
-		char [][] a = new char[1][1];
-		return a;
+
+	public String[] getHorasDeSesionesDeSala() {
+		// mÃ©todo que devuelve un vector de String con las horas de las sesiones
+		// asociadas a la propia sala. En la posiciÃ³n 0 del vector se encontrarÃ¡
+		// la hora de la sesiÃ³n 1, en la posiciÃ³n 1
+		// la de la sesiÃ³n 2, y asÃ­ sucesivamente.
+		String[] arr = new String[this.sesion.size()];
+		for (int i = 0; i < this.sesion.size(); i++) {
+			arr[i] = this.sesion.get(i).getHora();
+		}
+		return arr;
 	}
-	
-	public String getPelicula(){
-	//método que devuelve el título de la película asociada a la propia sala.
+
+	public char[][] getEstadoSesion(int sesion) {
+		// mÃ©todo que devuelve una matriz de caracteres en la que se representa
+		// el estado de ocupaciÃ³n de la propia sala para una sesiÃ³n dada. El
+		// contenido de esta matriz se especifica en el mÃ©todo
+		// con el mismo nombre de la clase Sesion.
+		return this.sesion.get(sesion).getEstadoSesion();
+	}
+
+	public String getPelicula() {
 		return this.pelicula;
 	}
-	
-	public String recogerEntradas(int id, int sesion){
-	// método que devuelve las N entradas asociadas a un identificador de venta dado para la propia sala y una sesión dada. Las N entradas se devolverán dentro de un String con el siguiente 
-	//formato:  “título_de_la_película@hora_de_la_sesión+fila1,columna1+fila2,columna2+ … +filaN,columnaN+” Si el identificador de venta dado no existe en la propia sala y la sesión dada, se devuelve null.
-		return "ds";
+
+	public int getButacasDisponiblesSesion(int sesion) {
+		// mÃ©todo que devuelve el nÃºmero de butacas disponibles en la propia
+		// sala para una sesiÃ³n dada.
+		return this.sesion.get(sesion).getButacasDisponiblesSesion();
 	}
-	
-	public int getButacasDisponiblesSesion(int sesion){
-	//método que devuelve el número de butacas disponibles en la propia sala para una sesión dada. 
-		return 0;
+
+	public String recogerEntradas(int id, int sesion) {
+		// mÃ©todo que devuelve las N entradas asociadas a un identificador de
+		// venta dado para la propia sala y una sesiÃ³n dada. Las N entradas se
+		// devolverÃ¡n dentro de un String con el siguiente
+		// formato:
+		// â€œtÃ­tulo_de_la_pelÃ­cula@hora_de_la_sesiÃ³n+fila1,columna1+fila2,columna2+
+		// â€¦ +filaN,columnaN+â€ Si el identificador de venta dado no existe en la
+		// propia sala y la sesiÃ³n dada, se devuelve null.
+		String res = "";
+		if (this.sesion.get(sesion).recogerEntradas(id) != null) {
+			return res += this.pelicula + "@" + this.sesion.get(sesion).recogerEntradas(id);
+		} else {
+			return null;
+		}
 	}
-	
-	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sesion){
-	//método que dados un número de butacas y una sesión de la propia sala, devuelve un objeto de tipo ButacasContiguas que contiene la fila y la columna de la butaca recomendaba con menor número de columna, 
-	//y el número de butacas solicitadas. El algoritmo para obtener las butacas recomendadas se explica en la especificación del método con el mismo nombre en la clase Sesion.
-		ButacasContiguas t = new ButacasContiguas(1,1,1);
-		return t;
+
+	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sesion) {
+		// mÃ©todo que dados un nÃºmero de butacas y una sesiÃ³n de la propia sala,
+		// devuelve un objeto de tipo ButacasContiguas que contiene la fila y la
+		// columna de la butaca recomendaba con menor nÃºmero de columna,
+		// y el nÃºmero de butacas solicitadas. El algoritmo para obtener las
+		// butacas recomendadas se explica en la especificaciÃ³n del mÃ©todo con
+		// el mismo nombre en la clase Sesion.
+
 	}
-	
-	public void comprarEntradasRecomendadas(int sesion, ButacasContiguas butacas){
-	// método que dados un objeto de tipo ButacasContiguas y una sesión de la propia sala, registra la compra en el objeto de tipo Sesion correspondiente
+
+	public void comprarEntradasRecomendadas(int sesion, ButacasContiguas butacas) {
+		// mÃ©todo que dados un objeto de tipo ButacasContiguas y una sesiÃ³n de
+		// la propia sala, registra la compra en el objeto de tipo Sesion
+		// correspondiente
+		this.sesion.get(sesion).comprarEntradasRecomendadas(butacas);
 	}
-	
-	public void incluirSesion(String horaSesion){
-	// método que añade una nueva sesión con la hora dada a la propia sala. Se realizará la inserción de forma que se mantenga ordenado el arraylist de sesiones
+
+	public void incluirSesion(String horaSesion) {
+		// mÃ©todo que aÃ±ade una nueva sesiÃ³n con la hora dada a la propia sala.
+		// Se realizarÃ¡ la inserciÃ³n de forma que se mantenga ordenado el
+		// arraylist de sesiones.
+
 	}
-	
-	public void borrarSesion(String horaSesion){
-	//método que borra la sesión con la hora dada de la propia sala. 
+
+	public void borrarSesion(String horaSesion) {
+		// mÃ©todo que borra la sesiÃ³n con la hora dada de la propia sala.
+		boolean aux = false;
+		for (int i = 0; !this.sesion.get(i).getHora().equals(horaSesion) && !aux; i++) {
+			this.sesion.removeElementAt(i);
+			aux = true;
+		}
 	}
-	
+
 }
