@@ -185,6 +185,43 @@ public class Sesion {
 		// ---------------Parte3---------------- //
 		
 		return null;
+		
+		
+		//OPCIÓN de MAX
+		int filas = (estadoAsientos.length/2) + 1;
+		int columna = estadoAsientos[0].length - 1;
+		int cont = 0;
+		boolean bool = false;
+		boolean top = false;
+		ButacasContiguas butacas = null;
+		while(!bool && cont < estadoAsientos.length){
+			int aux = 0;
+			for(int i = columna; i<=0; i--){
+				if(estadoAsientos[filas][i] == 0 && aux - noButacas >= 0){
+					aux += 1;
+					if(aux == noButacas){
+						butacas = new ButacasContiguas(filas, i, noButacas);
+						bool = true;
+					}//fin de if
+				}//fin de if
+			}//fin de for
+			if(filas == estadoAsientos.length - 1 && !top){
+				filas = estadoAsientos.length/2;
+				cont ++;
+				top = false;
+			}else if(top){
+				filas ++;
+				cont ++;
+			}else if(!top){
+				filas --;
+				cont ++;
+			}//fin de else
+		}//fin de while 
+		if(bool){
+			return butacas;
+		}else{
+			return null;
+		}
 	}
 	public void comprarEntradasRecomendadas(ButacasContiguas butacas){
 	//método que dado un objeto de tipo ButacasContiguas, registra la compra en la propia sesión guardando el valor actual del atributo sigIdCompra en las posiciones especificadas por el objeto dado como argumento. 
