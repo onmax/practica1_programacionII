@@ -225,6 +225,13 @@ public class Sesion {
 	}
 	public void comprarEntradasRecomendadas(ButacasContiguas butacas){
 	//método que dado un objeto de tipo ButacasContiguas, registra la compra en la propia sesión guardando el valor actual del atributo sigIdCompra en las posiciones especificadas por el objeto dado como argumento. 
-	//A continuación, se incrementa en uno el atributo sigIdCompra. 
+	//A continuación, se incrementa en uno el atributo sigIdCompra.
+		int fila = butacas.getFila();
+		int columna = butacas.getColumna();
+		int noButacas = butacas.getNoButacas();
+		for(int i = columna; i<= noButacas; i++){
+			this.estadoAsientos[fila][i] = sigIdCompra;
+		}
+		this.sigIdCompra ++;
 	}
 }
