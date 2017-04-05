@@ -51,7 +51,7 @@ public class Cine {
 	}
 
 	public void comprarEntradasRecomendadas(int sala, int sesion, ButacasContiguas butacas) {
-
+		this.salas[sala].comprarEntradasRecomendadas(sesion, butacas);
 	}
 
 	public void incluirSesion(int sala, String horaSesion) {
