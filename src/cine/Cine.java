@@ -9,7 +9,7 @@ public class Cine {
 		this.salas = salas;
 	}
 
-	public void comprarEntradas(int sala, int sesion, int fila, int columna) {
+	public void comprarEntrada(int sala, int sesion, int fila, int columna) {
 		this.salas[sala].comprarEntrada(sesion, fila, columna);
 	}
 	
