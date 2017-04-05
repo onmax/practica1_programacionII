@@ -47,7 +47,7 @@ public class Cine {
 	}
 
 	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sala, int sesion) {
-
+		return this.salas[sala].recomendarButacasContiguas(noButacas, sesion);
 	}
 
 	public void comprarEntradasRecomendadas(int sala, int sesion, ButacasContiguas butacas) {
