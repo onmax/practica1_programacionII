@@ -55,10 +55,10 @@ public class Cine {
 	}
 
 	public void incluirSesion(int sala, String horaSesion) {
-
+		this.salas[sala].incluirSesion(horaSesion);
 	}
 
 	public void borrarSesion(int sala, String horaSesion) {
-
+		this.salas[sala].borrarSesion(horaSesion);
 	}
 }
