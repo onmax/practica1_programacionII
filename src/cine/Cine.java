@@ -12,15 +12,11 @@ public class Cine {
 	public void comprarEntradas(int sala, int sesion, int fila, int columna) {
 		this.salas[sala].comprarEntrada(sesion, fila, columna);
 	}
-
-	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sala, int sesion) {
-
-	}
-
+	
 	public int getIdEntrada(int sala, int sesion, int fila, int columna) {
 		return this.salas[sala].getIdEntrada(sesion, fila, columna);
 	}
-
+	
 	public String[] getPeliculas() {
 		String[] aux = new String[this.salas.length];
 		for (int i = 0; i < this.salas.length; i++) {
@@ -28,25 +24,30 @@ public class Cine {
 		}
 		return aux;
 	}
-
+	
 	public String[] getHorasDeSesionesDeSala(int sala) {
 		return this.salas[sala].getHorasDeSesionesDeSala();
 	}
-
+	
 	public char[][] getEstadoSesion(int sala, int sesion) {
 		return this.salas[sala].getEstadoSesion(sesion);
 	}
-
-	public String[] getEstadoSesionDeSala(int sala) {
-
-	}
-
-	public String recogerEntradas(int id, int sala, int sesion) {
-
-	}
-
+	
 	public int getButacasDisponiblesSesion(int sala, int sesion) {
 		return this.salas[sala].getButacasDisponiblesSesion(sesion);
+	}
+	
+	public String recogerEntradas(int id, int sala, int sesion) {
+		String info = this.salas[sala].recogerEntradas(id, sesion);
+		if(info == null){
+			return this.nombre + "@" + info;
+		}else{
+			return null;
+		}
+	}
+
+	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sala, int sesion) {
+
 	}
 
 	public void comprarEntradasRecomendadas(int sala, int sesion, ButacasContiguas butacas) {
