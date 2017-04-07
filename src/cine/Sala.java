@@ -92,10 +92,12 @@ public class Sala {
 	}
 
 	public void incluirSesion(String horaSesion) {
-		// método que añade una nueva sesión con la hora dada a la propia sala.
-		// Se realizará la inserción de forma que se mantenga ordenado el
-		// arraylist de sesiones.
-
+		Sesion introducir = new Sesion (horaSesion, this.filas, this.columnas);
+		for(int i = 0; i<this.sesion.size(); i++){
+			if(horaSesion.compareTo(this.sesion.get(i).getHora()) < 0){
+				this.sesion.add(i, introducir);
+			}
+		}
 	}
 
 	public void borrarSesion(String horaSesion) {
