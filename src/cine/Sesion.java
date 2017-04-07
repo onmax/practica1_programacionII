@@ -108,126 +108,42 @@ public class Sesion {
 	}
 	
 	public ButacasContiguas recomendarButacasContiguas(int noButacas){
-	// método que dados un número N de butacas, devuelve un objeto de tipo ButacasContiguas que contiene la fila y la columna de la butaca recomendaba con menor número de columna, y el número de butacas solicitadas. 
-	//El algoritmo para obtener las butacas recomendadas es el siguiente: 1. Se buscan las primeras N butacas contiguas libres empezando por la fila (N_FILAS+1)/2+1 y acabando en la fila N_FILAS. Cada fila se recorre 
-	//empezando por la columna N_COLUMNAS y acabando en la columna 1. 2. Si en el paso anterior no se encuentran N butacas contiguas libres, se buscan las primeras N butacas contiguas libres empezando por la fila 
-	//(N_FILAS+1)/2 y acabando en la fila 1. Cada fila se recorre empezando por la columna N_COLUMNAS y acabando en la columna 1. Si no existen N butacas libres contiguas en la sala para la propia sesión, se devuelve null.
-	//Por ejemplo, si tomamos la sala de la figura 2 y buscamos 3 butacas contiguas libres, este algoritmo devolverá las butacas (4, 3), (4, 4) y (4, 5).
+		int fila_seleccionada  = (estadoAsientos.length/2) + 1;
+		int top = fila_seleccionada;
+		int columna = estadoAsientos[0].length - 1;
+		int contador = 0;
+		int aux = 0;
+		boolean signo = true;
+		boolean encontrado = false;
+		ButacasContiguas butacas = null;
 		
-		//--------METODO DE MAX--------//
-		int filas = (estadoAsientos.length/2) + 1;
-		int columnas = estadoAsientos[0].length - 1;
-		int cont = 0;
-		boolean bool = false;
-		ButacasContiguas butacas;
-		while(!bool && cont < estadoAsientos.length){
-			int aux = 0;
-			for(int i = 0; i>=0; i--){
-				if(estadoAsientos[filas][i] == 0 && aux - noButacas >= 0){
-					aux += 1;
-					if(aux == noButacas){
-						butacas = new ButacasContiguas(filas, i, noButacas);
-						bool = true;
-					}
+		while(contador < estadoAsientos.length && !encontrado){
+			aux = 0;
+			for(int i=columna; i >= 0; i--){
+				if(estadoAsientos[fila_seleccionada][i] == 0 && noButacas - aux  >= 0){
+					aux ++;
 				}
-			}
-			if(filas == estadoAsientos.length - 1){
-				filas = 0;
-				cont ++;
-			}else{
-				filas ++;
-				cont ++;
+				if(aux == noButacas){
+					butacas = new ButacasContiguas(fila_seleccionada, i, noButacas);
+					encontrado = true;
+				}
 			}
 			
+			if(estadoAsientos.length - contador == top){
+				fila_seleccionada = estadoAsientos.length/2;
+				signo = false;
+			}else if(signo){
+				fila_seleccionada ++;
+			}else if(!signo){
+				fila_seleccionada --;
+			}
+			contador ++;
 		}
 		
+		return butacas;
 	}
 	
-	//--------METODO DEL PUTO AMO----------//
-	
-	public ButacasContiguas recomendarButacasContiguas(int noButacas) {
-		
-		//------------------Variable--------------------- //
-		
-		int con = 0;
-		char[][] aux = getEstadoSesion();
-		
-		// ----------------Parte1----------------------- //
-		
-		for (int i = (this.estadoAsientos.length + 1) / 2 + 1; this.estadoAsientos.length > i; i++) {
-			for (int j = this.estadoAsientos[i].length-1; j > 1; j--) {
-				if (aux[i][j] == 'O') {
-					con++;
-					if (con == noButacas) {
-						ButacasContiguas solucion = new ButacasContiguas(i, j, noButacas);
-						return solucion;
-					} // Fin if2
-				} else {
-					con = 0;
-				}
-			} // Fin for j
-		} // Fin for i
-
-		// ---------------Parte2------------------- //
-
-		for (int i = (this.estadoAsientos.length + 1) / 2; i >= 1; i--) {
-			for (int j = this.estadoAsientos[i].length; j > 1; j--) {
-				if (aux[i][j] == 'O') {
-					con++;
-					if (con == noButacas) {
-						ButacasContiguas solucion = new ButacasContiguas(i, j, noButacas);
-						return solucion;
-					} // Fin if2
-				} else {
-					con = 0;
-				} // Fin else
-			} // Fin for j
-		} // Fin for i
-
-		// ---------------Parte3---------------- //
-		
-		return null;
-		
-		
-		//OPCIÓN de MAX
-		int filas = (estadoAsientos.length/2) + 1;
-		int columna = estadoAsientos[0].length - 1;
-		int cont = 0;
-		boolean bool = false;
-		boolean top = false;
-		ButacasContiguas butacas = null;
-		while(!bool && cont < estadoAsientos.length){
-			int aux = 0;
-			for(int i = columna; i<=0; i--){
-				if(estadoAsientos[filas][i] == 0 && aux - noButacas >= 0){
-					aux += 1;
-					if(aux == noButacas){
-						butacas = new ButacasContiguas(filas, i, noButacas);
-						bool = true;
-					}//fin de if
-				}//fin de if
-			}//fin de for
-			if(filas == estadoAsientos.length - 1 && !top){
-				filas = estadoAsientos.length/2;
-				cont ++;
-				top = false;
-			}else if(top){
-				filas ++;
-				cont ++;
-			}else if(!top){
-				filas --;
-				cont ++;
-			}//fin de else
-		}//fin de while 
-		if(bool){
-			return butacas;
-		}else{
-			return null;
-		}
-	}
 	public void comprarEntradasRecomendadas(ButacasContiguas butacas){
-	//método que dado un objeto de tipo ButacasContiguas, registra la compra en la propia sesión guardando el valor actual del atributo sigIdCompra en las posiciones especificadas por el objeto dado como argumento. 
-	//A continuación, se incrementa en uno el atributo sigIdCompra.
 		int fila = butacas.getFila();
 		int columna = butacas.getColumna();
 		int noButacas = butacas.getNoButacas();
