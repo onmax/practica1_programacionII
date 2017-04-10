@@ -30,7 +30,7 @@ public class Sesion {
 		return sesion.getHora() == this.hora;
 	}
 	
-	public boolean equals(Sesion obj){
+	public boolean equals(Object obj){
 		//método que compara el objeto de tipo Sesion dado con la propia sesión, y devuelve cierto si son iguales y falso en caso contrario. Se considera que dos sesiones son iguales si son iguales sus atributos hora.  
 		Sesion sesion = (Sesion) object;
 		return sesion.getHora() == this.hora;
