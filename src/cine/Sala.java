@@ -1,3 +1,8 @@
+package cine;
+
+import list.ArrayList;
+import java.util.Collection;
+
 public class Sala {
 	private String pelicula;
 	private ArrayList<Sesion> sesion;
@@ -81,6 +86,7 @@ public class Sala {
 		// y el número de butacas solicitadas. El algoritmo para obtener las
 		// butacas recomendadas se explica en la especificación del método con
 		// el mismo nombre en la clase Sesion.
+		return this.sesion.get(sesion).recomendarButacasContiguas(noButacas);
 
 	}
 
@@ -92,9 +98,9 @@ public class Sala {
 	}
 
 	public void incluirSesion(String horaSesion) {
-		Sesion introducir = new Sesion (horaSesion, this.filas, this.columnas);
-		for(int i = 0; i<this.sesion.size(); i++){
-			if(horaSesion.compareTo(this.sesion.get(i).getHora()) < 0){
+		Sesion introducir = new Sesion(horaSesion, this.sesion.get(0).getFilas(), this.sesion.get(0).getColumnas());
+		for (int i = 0; i < this.sesion.size(); i++) {
+			if (horaSesion.compareTo(this.sesion.get(i).getHora()) < 0) {
 				this.sesion.add(i, introducir);
 			}
 		}
@@ -109,4 +115,4 @@ public class Sala {
 		}
 	}
 
-}
+
