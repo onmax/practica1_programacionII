@@ -12,12 +12,13 @@ public class Sala {
 		this.filas = filas;
 		this.columnas = columnas;
 		this.sesion = new ArrayList<Sesion>();
+		String z;
 		for(int i = 0; i<horasSesiones.length - 1; i++){
 			for(int j = 0; j<horasSesiones.length - 1; j++){
 				int a = Integer.parseInt(horasSesiones[j+1].substring(0,2).replaceAll(":",""));
 				int b = Integer.parseInt(horasSesiones[j].substring(0,2).replaceAll(":",""));
 				if(a < b){
-					String z = horasSesiones[j];
+					z = horasSesiones[j];
 					horasSesiones[j] = horasSesiones[j+1];
 					horasSesiones[j+1] = z;
 				}
