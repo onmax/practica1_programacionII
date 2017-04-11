@@ -23,9 +23,6 @@ public class Sala {
 				}
 			}
 		}
-		for(int i= 0; i<horasSesiones.length; i++){
-			
-		}
 		
 		for(int i = 0; i<horasSesiones.length; i++){
 			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
