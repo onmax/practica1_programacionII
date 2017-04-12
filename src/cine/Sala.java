@@ -56,7 +56,6 @@ public class Sala {
 	}
 
 	public String getPelicula() {
-		// sala.
 		return this.pelicula;
 	}
 
