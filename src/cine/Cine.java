@@ -38,7 +38,7 @@ public class Cine {
 	}
 
 	public String recogerEntradas(int id, int sala, int sesion) {
-		String info = this.salas[sala].recogerEntradas(id, sesion);
+		String info = this.salas[sala - 1].recogerEntradas(id, sesion);
 		if (info != null) {
 			return this.nombre + "@" + info;
 		} else {
