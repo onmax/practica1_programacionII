@@ -117,6 +117,7 @@ public class Sesion {
 				}
 			}
 			
+			contador ++;
 			if(recorrido == this.estadoAsientos.length - 1){
 				suma = false;
 				recorrido = 0;
