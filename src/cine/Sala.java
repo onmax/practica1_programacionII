@@ -11,13 +11,11 @@ public class Sala {
 		this.pelicula = pelicula;
 		this.filas = filas;
 		this.columnas = columnas;
-		this.sesion = new ArrayList<Sesion>();
+		this.sesiones = new ArrayList<Sesion>();
 		String z;
 		for(int i = 0; i<horasSesiones.length - 1; i++){
-			for(int j = 0; j<horasSesiones.length - 1; j++){
-				int a = Integer.parseInt(horasSesiones[j+1].substring(0,2).replaceAll(":",""));
-				int b = Integer.parseInt(horasSesiones[j].substring(0,2).replaceAll(":",""));
-				if(a < b){
+			for(int j = 0; j<horasSesiones.length - i - 1; j++){
+				if(horasSesiones[j+1].compareTo(horasSesiones[j]) < 0){
 					z = horasSesiones[j];
 					horasSesiones[j] = horasSesiones[j+1];
 					horasSesiones[j+1] = z;
@@ -27,7 +25,7 @@ public class Sala {
 		
 		for(int i = 0; i<horasSesiones.length; i++){
 			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
-			sesion.add(i, aux);
+			sesiones.add(i, aux);
 		}
 	}
 
