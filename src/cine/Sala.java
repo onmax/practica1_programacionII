@@ -134,16 +134,14 @@ public class Sala {
 				aux = true;
 			}
 		}
-
 	}
 
 	public void borrarSesion(String horaSesion) {
 		// método que borra la sesión con la hora dada de la propia sala.
 		boolean aux = false;
-		for (int i = 0; !this.sesiones.get(i).getHora().equals(horaSesion) && !aux; i++) {
+		for (int i = 0; this.sesiones.get(i).getHora().equals(horaSesion) && !aux; i++) {
 			this.sesiones.removeElementAt(i);
 			aux = true;
 		}
 	}
-
 }
