@@ -112,10 +112,12 @@ public class Sala {
 	}
 
 	public void incluirSesion(String horaSesion) {
+		boolean encontrado = true;
 		Sesion introducir = new Sesion(horaSesion, this.filas, this.columnas);
-		for (int i = 0; i < this.sesiones.size(); i++) {
+		for (int i = 0; i < this.sesiones.size() && encontrado; i++) {
 			if (horaSesion.compareTo(this.sesiones.get(i).getHora()) < 0) {
 				this.sesiones.add(i, introducir);
+				encontrado = false;
 			}
 		}
 	}
