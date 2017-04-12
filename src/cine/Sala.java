@@ -7,25 +7,25 @@ public class Sala {
 	private ArrayList<Sesion> sesiones;
 	private int filas, columnas;
 
-	private void ordenarBurbuja (String [] aux){
+	private void burbuja(String[] aux) {
 		String z = "";
 		for (int i = 0; i < aux.length - 1; i++) {
-			for (int j = 0; j < aux.length-1-i; j++) {
-				if (aux[j + 1].compareTo(aux[j])<0) {
-					z = aux[j+1];
-					aux[j+1] = aux[j];
+			for (int j = 0; j < aux.length - 1 - i; j++) {
+				if (aux[j + 1].compareTo(aux[j]) < 0) {
+					z = aux[j + 1];
+					aux[j + 1] = aux[j];
 					aux[j] = z;
 				}
 			}
 		}
 	}
-	
+
 	public Sala(String pelicula, String[] horasSesiones, int filas, int columnas) {
 		this.pelicula = pelicula;
 		this.filas = filas;
 		this.columnas = columnas;
 		this.sesiones = new ArrayList<Sesion>();
-		ordenarBurbuja(horasSesiones);
+		burbuja(horasSesiones);
 		for (int i = 0; i < horasSesiones.length; i++) {
 			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
 			sesiones.add(i, aux);
@@ -41,12 +41,12 @@ public class Sala {
 	}
 
 	public void comprarEntrada(int sesion, int fila, int columna) {
-		Sesion aux = this.sesiones.get(sesion);
+		Sesion aux = this.sesiones.get(sesion-1);
 		aux.comprarEntrada(fila, columna);
 	}
 
 	public int getIdEntrada(int sesion, int fila, int columna) {
-		return this.sesiones.get(sesion).getIdEntrada(fila, columna);
+		return this.sesiones.get(sesion-1).getIdEntrada(fila, columna);
 	}
 
 	public String[] getHorasDeSesionesDeSala() {
@@ -66,7 +66,7 @@ public class Sala {
 		// el estado de ocupación de la propia sala para una sesión dada. El
 		// contenido de esta matriz se especifica en el método
 		// con el mismo nombre de la clase Sesion.
-		return this.sesiones.get(sesion).getEstadoSesion();
+		return this.sesiones.get(sesion-1).getEstadoSesion();
 	}
 
 	public String getPelicula() {
@@ -76,7 +76,7 @@ public class Sala {
 	public int getButacasDisponiblesSesion(int sesion) {
 		// método que devuelve el número de butacas disponibles en la propia
 		// sala para una sesión dada.
-		return this.sesiones.get(sesion).getButacasDisponiblesSesion();
+		return this.sesiones.get(sesion-1).getButacasDisponiblesSesion();
 	}
 
 	public String recogerEntradas(int id, int sesion) {
@@ -88,7 +88,7 @@ public class Sala {
 		// … +filaN,columnaN+” Si el identificador de venta dado no existe en la
 		// propia sala y la sesión dada, se devuelve null.
 		String res = "";
-		if (this.sesiones.get(sesion).recogerEntradas(id) != null) {
+		if (this.sesiones.get(sesion-1).recogerEntradas(id) != null) {
 			return res += this.pelicula + "@" + this.sesiones.get(sesion).recogerEntradas(id);
 		} else {
 			return null;
@@ -102,7 +102,7 @@ public class Sala {
 		// y el número de butacas solicitadas. El algoritmo para obtener las
 		// butacas recomendadas se explica en la especificación del método con
 		// el mismo nombre en la clase Sesion.
-		return this.sesiones.get(sesion).recomendarButacasContiguas(noButacas);
+		return this.sesiones.get(sesion-1).recomendarButacasContiguas(noButacas);
 
 	}
 
@@ -110,7 +110,7 @@ public class Sala {
 		// método que dados un objeto de tipo ButacasContiguas y una sesión de
 		// la propia sala, registra la compra en el objeto de tipo Sesion
 		// correspondiente
-		this.sesiones.get(sesion).comprarEntradasRecomendadas(butacas);
+		this.sesiones.get(sesion-1).comprarEntradasRecomendadas(butacas);
 	}
 
 	public void incluirSesion(String horaSesion) {
@@ -127,9 +127,11 @@ public class Sala {
 	public void borrarSesion(String horaSesion) {
 		// método que borra la sesión con la hora dada de la propia sala.
 		boolean aux = false;
-		for (int i = 0; !this.sesiones.get(i).getHora().equals(horaSesion) && !aux; i++) {
+		for (int i = 0;!aux && i<this.sesiones.size(); i++) {
+			if(!this.sesiones.get(i).getHora().equals(horaSesion)){
 			this.sesiones.removeElementAt(i);
 			aux = true;
+			}
 		}
 	}
 }
