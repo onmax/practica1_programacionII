@@ -8,22 +8,25 @@ public class Sala {
 	private ArrayList<Sesion> sesiones;
 	private int filas, columnas;
 
+	private void burbuja (String [] aux){
+		String z = "";
+		for (int i = 0; i < aux.length - 1; i++) {
+			for (int j = 0; j < aux.length-1-i; j++) {
+				if (aux[j + 1].compareTo(aux[j])<0) {
+					z = aux[j+1];
+					aux[j+1] = aux[j];
+					aux[j] = z;
+				}
+			}
+		}
+	}
+	
 	public Sala(String pelicula, String[] horasSesiones, int filas, int columnas) {
 		this.pelicula = pelicula;
 		this.filas = filas;
 		this.columnas = columnas;
 		this.sesiones = new ArrayList<Sesion>();
-		String z;
-		for (int i = 0; i < horasSesiones.length - 1; i++) {
-			for (int j = 0; j < horasSesiones.length - i - 1; j++) {
-				if (horasSesiones[j + 1].compareTo(horasSesiones[j]) < 0) {
-					z = horasSesiones[j];
-					horasSesiones[j] = horasSesiones[j + 1];
-					horasSesiones[j + 1] = z;
-				}
-			}
-		}
-
+		burbuja(horasSesiones);
 		for (int i = 0; i < horasSesiones.length; i++) {
 			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
 			sesiones.add(i, aux);
