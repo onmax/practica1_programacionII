@@ -11,7 +11,7 @@ public class Sala {
 	// a mayor por la hora de la sesión.
 	private int filas, columnas;
 	
-	private void burbuja (String [] aux){
+	private String [] ordenarBurbuja (String [] aux){
 		String z = "";
 		for (int i = 0; i < aux.length - 1; i++) {
 			for (int j = 0; j < aux.length-1-i; j++) {
@@ -22,6 +22,7 @@ public class Sala {
 				}
 			}
 		}
+		return aux;
 	}
 
 	public Sala(String pelicula, String[] horasSesiones, int filas, int columnas) {
@@ -34,7 +35,7 @@ public class Sala {
 		this.filas = filas;
 		this.columnas = columnas;
 		this.sesiones = new ArrayList<Sesion>();
-		burbuja(horasSesiones);
+		horasSesiones = ordenarBurbuja(horasSesiones);
 		for (int i = 0; i < horasSesiones.length; i++) {
 			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
 			sesiones.add(i, aux);
