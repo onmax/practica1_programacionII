@@ -30,7 +30,6 @@ public class Sesion {
 		this.estadoAsientos[fila - 1][columna - 1] = this.sigIdCompra;
 		this.sigIdCompra++;
 		this.asientosDisponibles--;
-
 	}
 
 	public int getIdEntrada(int fila, int columna) {
@@ -81,8 +80,6 @@ public class Sesion {
 		boolean encontrado = false;
 		ButacasContiguas butacas = null;
 		while (contador < this.estadoAsientos.length && !encontrado) {
-
-			System.out.println(this.estadoAsientos.length);
 			asiento = noButacas;
 			for (int i = this.estadoAsientos[0].length - 1; i >= 0 && !encontrado; i--) {
 				if (this.estadoAsientos[puntero + 1][i] == 0) {
@@ -96,21 +93,17 @@ public class Sesion {
 					encontrado = true;
 				}
 			}
-
 			contador++;
-
 			if (puntero == this.estadoAsientos.length - 1) {
 				puntero = this.estadoAsientos.length / 2;
 				signo = false;
 			}
-
 			if (signo) {
 				puntero++;
 			} else {
 				puntero--;
 			}
 		}
-
 		if (encontrado) {
 			return butacas;
 		} else {
@@ -129,7 +122,5 @@ public class Sesion {
 			this.asientosDisponibles--;
 		}
 		this.sigIdCompra++;
-
 	}
-
 }
