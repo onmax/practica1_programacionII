@@ -18,10 +18,6 @@ public class Sesion {
 	}
 
 	public boolean equals(Object object) {
-		// método que compara el objeto de tipo Sesion dado con la propia
-		// sesión, y devuelve cierto si son iguales y falso en caso contrario.
-		// Se considera que dos sesiones son iguales si son iguales sus
-		// atributos hora.
 		Sesion sesion = (Sesion) object;
 		return sesion.getHora() == this.hora;
 	}
@@ -44,11 +40,11 @@ public class Sesion {
 					res[i][j] = 'O';
 				} else {
 					res[i][j] = '#';
-				}
-			}
-		}
+				}//fin else
+			}//fin for
+		}//fin for
 		return res;
-	}
+	}//fin método
 
 	public int getButacasDisponiblesSesion() {
 		return this.asientosDisponibles;
@@ -62,9 +58,9 @@ public class Sesion {
 				if (this.estadoAsientos[i][j] == id) {
 					bool = true;
 					res += "fila" + (i + 1) + ",columna" + (j + 1) + "+";
-				}
-			}
-		}
+				}//fin de if
+			}//fin de for
+		}//fin de for
 		if (!bool) {
 			return null;
 		} else {
@@ -86,29 +82,29 @@ public class Sesion {
 					asiento--;
 				} else {
 					asiento = noButacas;
-				}
+				}//fin de else
 
 				if (asiento == 0) {
 					butacas = new ButacasContiguas(puntero + 1, i + 1, noButacas);
 					encontrado = true;
-				}
-			}
+				}//fin de if
+			}//fin de for
 			contador++;
 			if (puntero == this.estadoAsientos.length - 1) {
 				puntero = this.estadoAsientos.length / 2;
 				signo = false;
-			}
+			}//fin de if
 			if (signo) {
 				puntero++;
 			} else {
 				puntero--;
-			}
-		}
+			}//fin de ifelse
+		}//fin de while
 		if (encontrado) {
 			return butacas;
 		} else {
 			return null;
-		}
+		}//fin de ifelse
 	}
 
 	public void comprarEntradasRecomendadas(ButacasContiguas butacas) {
