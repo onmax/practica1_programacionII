@@ -62,4 +62,3 @@ public class Cine {
 		this.salas[sala - 1].borrarSesion(horaSesion);
 	}
 }
-
