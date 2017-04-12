@@ -1,7 +1,6 @@
 package cine;
 
 import list.ArrayList;
-import java.util.Collection;
 
 public class Sala {
 	private String pelicula;
