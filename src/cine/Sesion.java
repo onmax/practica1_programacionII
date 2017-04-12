@@ -105,20 +105,21 @@ public class Sesion {
 		boolean aux = false;
 		while(contador < this.estadoAsientos.length && !aux){
 			asientos = 0;
-			for(int i = columna - 1; i >= 0 && i - noButacas >= 0 && !aux; i--){
+			for(int i = columna - 1; i > 0 && i - noButacas > 0 && !aux; i--){
 				if(this.estadoAsientos[recorrido][i] == 0){
 					asientos ++;
 				}else{
 					asientos = 0;
 				}
 				if(asientos == noButacas){
-					butacas = new ButacasContiguas(recorrido, i, noButacas);
+					butacas = new ButacasContiguas(recorrido+1, i+1, noButacas);
 					aux = true;
 				}
 			}
 			
+
 			contador ++;
-			if(recorrido == this.estadoAsientos.length - 1){
+			if(recorrido == this.estadoAsientos.length){
 				suma = false;
 				recorrido = this.estadoAsientos.length/ 2;
 			}
@@ -140,24 +141,13 @@ public class Sesion {
 		int columna = butacas.getColumna();
 		int noButacas = butacas.getNoButacas();
 		while(noButacas > 0){
-			this.estadoAsientos[fila][columna]= this.sigIdCompra;
+			this.estadoAsientos[fila - 1][columna - 1]= this.sigIdCompra;
 			columna ++;
 			noButacas --;
 			this.asientosDisponibles --;
 		}
 		this.sigIdCompra ++;
 		
-	}
-	
-	public void gg(){
-		for(int i = 0; i< estadoAsientos.length; i++){
-			System.out.println("Fila " + (i + 1));
-			for(int j = 0; j<estadoAsientos[0].length; j++){
-				System.out.print(estadoAsientos[i][j]);
-			}
-			System.out.println();
-		}
-	}
-	
+	}	
 	
 }
