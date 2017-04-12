@@ -6,26 +6,27 @@ import java.util.Collection;
 public class Sala {
 	private String pelicula;
 	private ArrayList<Sesion> sesion;
+	private int filas, columnas;
 
 	public Sala(String pelicula, String[] horasSesiones, int filas, int columnas) {
 		this.pelicula = pelicula;
 		this.filas = filas;
 		this.columnas = columnas;
-		this.sesiones = new ArrayList<Sesion>();
+		this.sesion = new ArrayList<Sesion>();
 		String z;
-		for(int i = 0; i<horasSesiones.length - 1; i++){
-			for(int j = 0; j<horasSesiones.length - i - 1; j++){
-				if(horasSesiones[j+1].compareTo(horasSesiones[j]) < 0){
+		for (int i = 0; i < horasSesiones.length - 1; i++) {
+			for (int j = 0; j < horasSesiones.length - i - 1; j++) {
+				if (horasSesiones[j + 1].compareTo(horasSesiones[j]) < 0) {
 					z = horasSesiones[j];
-					horasSesiones[j] = horasSesiones[j+1];
-					horasSesiones[j+1] = z;
+					horasSesiones[j] = horasSesiones[j + 1];
+					horasSesiones[j + 1] = z;
 				}
 			}
 		}
-		
-		for(int i = 0; i<horasSesiones.length; i++){
+
+		for (int i = 0; i < horasSesiones.length; i++) {
 			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
-			sesiones.add(i, aux);
+			sesion.add(i, aux);
 		}
 	}
 
@@ -111,7 +112,7 @@ public class Sala {
 	}
 
 	public void incluirSesion(String horaSesion) {
-		Sesion introducir = new Sesion(horaSesion, this.sesion.get(0).getFilas(), this.sesion.get(0).getColumnas());
+		Sesion introducir = new Sesion(horaSesion, this.filas, this.columnas);
 		for (int i = 0; i < this.sesion.size(); i++) {
 			if (horaSesion.compareTo(this.sesion.get(i).getHora()) < 0) {
 				this.sesion.add(i, introducir);
@@ -127,5 +128,4 @@ public class Sala {
 			aux = true;
 		}
 	}
-
-
+}
