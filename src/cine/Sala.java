@@ -7,7 +7,7 @@ public class Sala {
 	private ArrayList<Sesion> sesiones;
 	private int filas, columnas;
 
-	private void burbuja (String [] aux){
+	private void ordenarBurbuja (String [] aux){
 		String z = "";
 		for (int i = 0; i < aux.length - 1; i++) {
 			for (int j = 0; j < aux.length-1-i; j++) {
@@ -25,7 +25,7 @@ public class Sala {
 		this.filas = filas;
 		this.columnas = columnas;
 		this.sesiones = new ArrayList<Sesion>();
-		burbuja(horasSesiones);
+		ordenarBurbuja(horasSesiones);
 		for (int i = 0; i < horasSesiones.length; i++) {
 			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
 			sesiones.add(i, aux);
