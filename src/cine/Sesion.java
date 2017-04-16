@@ -81,40 +81,44 @@ public class Sesion {
 	public ButacasContiguas recomendarButacasContiguas(int noButacas) {
 		int puntero = (this.estadoAsientos.length / 2) + 1;
 		int contador = 0;
-		int asiento;
-		boolean signo = true;
 		boolean encontrado = false;
+		boolean signo = true;
+		int asientos;
 		ButacasContiguas butacas = null;
-		while (contador < this.estadoAsientos.length && !encontrado) {
-			asiento = noButacas;
-			for (int i = this.estadoAsientos[0].length - 1; i >= 0 && !encontrado; i--) {
-				if (this.estadoAsientos[puntero + 1][i] == 0) {
-					asiento--;
-				} else {
-					asiento = noButacas;
-				}//fin de else
-
-				if (asiento == 0) {
+		while(!encontrado && contador < this.estadoAsientos.length){
+			asientos = noButacas;
+			for(int i = this.estadoAsientos[puntero].length - 1; !encontrado && i > 0; i--){
+				System.out.println("lenght " + (this.estadoAsientos[puntero].length - 1));
+				System.out.println(puntero + " " + i);
+				if(this.estadoAsientos[puntero+1][i] == 0){
+					asientos --;
+				}else{
+					asientos = noButacas;
+				}
+				if(asientos == 0){
 					butacas = new ButacasContiguas(puntero + 1, i + 1, noButacas);
 					encontrado = true;
-				}//fin de if
-			}//fin de for
-			contador++;
-			if (puntero == this.estadoAsientos.length - 1) {
-				puntero = this.estadoAsientos.length / 2;
+				}
+			}
+			
+			
+			contador ++;
+			if(puntero == this.estadoAsientos.length - 1){
 				signo = false;
-			}//fin de if
-			if (signo) {
-				puntero++;
-			} else {
-				puntero--;
-			}//fin de ifelse
-		}//fin de while
-		if (encontrado) {
+				puntero = this.estadoAsientos.length / 2;
+			}
+			if(signo){
+				puntero ++;
+			}else{
+				puntero --;
+			}
+		}
+		
+		if(encontrado){
 			return butacas;
-		} else {
+		}else{
 			return null;
-		}//fin de ifelse
+		}
 	}
 
 	public void comprarEntradasRecomendadas(ButacasContiguas butacas) {
