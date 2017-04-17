@@ -88,8 +88,6 @@ public class Sesion {
 		while(!encontrado && contador < this.estadoAsientos.length){
 			asientos = noButacas;
 			for(int i = this.estadoAsientos[puntero].length - 1; !encontrado && i > 0; i--){
-				System.out.println("lenght " + (this.estadoAsientos[puntero].length - 1));
-				System.out.println(puntero + " " + i);
 				if(this.estadoAsientos[puntero+1][i] == 0){
 					asientos --;
 				}else{
