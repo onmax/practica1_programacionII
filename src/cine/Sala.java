@@ -62,7 +62,7 @@ public class Sala {
 		boolean aux = false;
 		if (this.sesiones.size() != 0) {
 			for (int i = 0; i < this.sesiones.size() && !aux; i++) {
-				if (horaSesion.compareTo(this.sesiones.get(i).getHora()) < 0) {
+				if (horaSesion.compareTo(this.sesiones.get(i).getHora()) != 0) {
 					this.sesiones.add(i, introducir);
 					aux = true;
 				} // fin de if
