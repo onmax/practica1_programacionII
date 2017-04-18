@@ -13,7 +13,7 @@ public class Sala {
 		this.columnas = columnas;
 		this.sesiones = new ArrayList<Sesion>();
 		for (int i = 0; i < horasSesiones.length; i++) {
-			incluirSesion(horasSesiones[i]);
+			this.incluirSesion(horasSesiones[i]);
 		}
 	}
 	
