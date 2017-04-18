@@ -1,43 +1,19 @@
 package cine;
-import anotacion.Programacion2;
+
 import list.ArrayList;
-@Programacion2 (
-		nombreAutor1 = "Máximo",
-		apellidoAutor1 = "García Martínez",
-		emailUPMAutor1 = "maximo.garcia.martinez@alumnos.upm.es",
-		nombreAutor2 = "Javier",
-		apellidoAutor2 = "Barragán Haro", 
-		emailUPMAutor2 = "javier.barragan.haro@alumnos.upm.es"
-	)
 
 public class Sala {
 	private String pelicula;
 	private ArrayList<Sesion> sesiones;
 	private int filas, columnas;
 
-	private String[] ordenarBurbuja(String[] aux) {
-		String z = "";
-		for (int i = 0; i < aux.length - 1; i++) {
-			for (int j = 0; j < aux.length - 1 - i; j++) {
-				if (aux[j + 1].compareTo(aux[j]) < 0) {
-					z = aux[j + 1];
-					aux[j + 1] = aux[j];
-					aux[j] = z;
-				}//fin de if
-			}//fin de for
-		}//fin de for
-		return aux;
-	}
-
 	public Sala(String pelicula, String[] horasSesiones, int filas, int columnas) {
 		this.pelicula = pelicula;
 		this.filas = filas;
 		this.columnas = columnas;
 		this.sesiones = new ArrayList<Sesion>();
-		horasSesiones = ordenarBurbuja(horasSesiones);
 		for (int i = 0; i < horasSesiones.length; i++) {
-			Sesion aux = new Sesion(horasSesiones[i], filas, columnas);
-			sesiones.add(i, aux);
+			incluirSesion(horasSesiones[i]);
 		}
 	}
 
