@@ -78,7 +78,7 @@ public class Sala {
 
 	public void borrarSesion(String horaSesion) {
 		boolean aux = false;
-		for (int i = 0; this.sesiones.get(i).getHora().equals(horaSesion) && !aux; i++) {
+		for (int i = 0;i<this.sesiones.size() &&  this.sesiones.get(i).getHora().equals(horaSesion) && !aux; i++) {
 			this.sesiones.removeElementAt(i);
 			aux = true;
 		}
