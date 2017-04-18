@@ -52,8 +52,7 @@ public class Sala {
 	}
 
 	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sesion) {
-		ButacasContiguas butacas = this.sesiones.get(sesion - 1).recomendarButacasContiguas(noButacas);
-		return butacas;
+		return this.sesiones.get(sesion - 1).recomendarButacasContiguas(noButacas);
 	}
 
 	public void comprarEntradasRecomendadas(int sesion, ButacasContiguas butacas) {
