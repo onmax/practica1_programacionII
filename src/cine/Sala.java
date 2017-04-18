@@ -22,8 +22,7 @@ public class Sala {
 	}
 
 	public int getIdEntrada(int sesion, int fila, int columna) {
-		Sesion obtenerId = this.sesiones.get(sesion - 1);
-		return obtenerId.getIdEntrada(fila, columna);
+		return this.sesiones.get(sesion - 1).getIdEntrada(fila, columna);
 	}
 
 	public String[] getHorasDeSesionesDeSala() {
@@ -43,8 +42,7 @@ public class Sala {
 	}
 
 	public String recogerEntradas(int id, int sesion) {
-		String res = getPelicula() + "@" + this.sesiones.get(sesion - 1).recogerEntradas(id);
-		return res;
+		return getPelicula() + "@" + this.sesiones.get(sesion - 1).recogerEntradas(id);
 	}
 
 	public int getButacasDisponiblesSesion(int sesion) {
