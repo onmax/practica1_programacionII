@@ -60,10 +60,12 @@ public class Sala {
 	public void incluirSesion(String horaSesion) {
 		Sesion introducir = new Sesion(horaSesion, this.filas, this.columnas);
 		boolean aux = false;
-		if (this.sesiones.size() != 0) {
+		if (this.sesiones.size() > 0) {
 			for (int i = 0; i < this.sesiones.size() && !aux; i++) {
-				if (horaSesion.compareTo(this.sesiones.get(i).getHora()) < 0) {
-					this.sesiones.add(i, introducir);
+				System.out.println("sfd");
+				if (this.sesiones.get(i).getHora().compareTo(horaSesion) < 0) {
+					System.out.println("13431");
+					this.sesiones.add(i+1, introducir);
 					aux = true;
 				} // fin de if
 			} // fin de for
@@ -75,9 +77,11 @@ public class Sala {
 
 	public void borrarSesion(String horaSesion) {
 		boolean aux = false;
-		for (int i = 0;i<this.sesiones.size() &&  this.sesiones.get(i).getHora().equals(horaSesion) && !aux; i++) {
-			this.sesiones.removeElementAt(i);
-			aux = true;
+		for (int i = 0;i<this.sesiones.size() && !aux; i++) {
+			if(this.sesiones.get(i).getHora().equals(horaSesion)){
+				this.sesiones.removeElementAt(i);
+				aux = true;
+			}
 		}
 	}
 }
