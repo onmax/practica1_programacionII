@@ -18,7 +18,7 @@ public class Sala {
 	}
 	
 	public void comprarEntrada(int sesion, int fila, int columna) {
-		this.sesiones.get(sesion - 1).comprarEntrada(fila, columna);
+		this.sesiones.get(sesion - 1).comprarEntrada(fila, columna);	
 	}
 
 	public int getIdEntrada(int sesion, int fila, int columna) {
@@ -62,9 +62,7 @@ public class Sala {
 		boolean aux = false;
 		if (this.sesiones.size() > 0) {
 			for (int i = 0; i < this.sesiones.size() && !aux; i++) {
-				System.out.println("sfd");
 				if (this.sesiones.get(i).getHora().compareTo(horaSesion) < 0) {
-					System.out.println("13431");
 					this.sesiones.add(i+1, introducir);
 					aux = true;
 				} // fin de if
@@ -72,8 +70,8 @@ public class Sala {
 		} else {
 			this.sesiones.add(0, introducir);
 		}
+		
 	}
-
 
 	public void borrarSesion(String horaSesion) {
 		boolean aux = false;
