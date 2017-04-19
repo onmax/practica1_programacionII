@@ -79,7 +79,10 @@ public class Sesion {
 	}
 
 	public ButacasContiguas recomendarButacasContiguas(int noButacas) {
-		int puntero = ((this.estadoAsientos.length+1) / 2) + 1;
+		int puntero = (this.estadoAsientos.length+1) / 2 + 1;
+		if(puntero == this.estadoAsientos.length){
+			puntero --;
+		}
 		int contador = 0;
 		boolean encontrado = false;
 		boolean signo = true;
@@ -87,8 +90,8 @@ public class Sesion {
 		ButacasContiguas butacas = null;
 		while(!encontrado && contador < this.estadoAsientos.length){
 			asientos = noButacas;
-			for(int i = this.estadoAsientos[puntero].length - 1; !encontrado && i > 0; i--){
-				if(this.estadoAsientos[puntero+1][i] == 0){
+			for(int i = this.estadoAsientos[puntero].length - 1; !encontrado && i >= 0; i--){
+				if(this.estadoAsientos[puntero][i] == 0){
 					asientos --;
 				}else{
 					asientos = noButacas;
@@ -98,17 +101,17 @@ public class Sesion {
 					encontrado = true;
 				}
 			}
-			
-			
 			contador ++;
-			if(puntero == this.estadoAsientos.length - 1){
-				signo = false;
-				puntero = this.estadoAsientos.length / 2;
-			}
 			if(signo){
-				puntero ++;
+				if(puntero == this.estadoAsientos.length-1){
+					signo = false;
+					puntero = (this.estadoAsientos.length+1) / 2;
+				}
+				if(signo){
+					puntero ++;
+				}
 			}else{
-				puntero --;
+				puntero -= 1;
 			}
 		}
 		
