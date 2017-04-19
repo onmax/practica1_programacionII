@@ -12,8 +12,8 @@ public class Sala {
 		this.filas = filas;
 		this.columnas = columnas;
 		this.sesiones = new ArrayList<Sesion>();
-		for (int i = 0; i < horasSesiones.length; i++) {
-			this.incluirSesion(horasSesiones[i]);
+		for(int i=0; i<horasSesiones.length; i++){
+			incluirSesion(horasSesiones[i]);
 		}
 	}
 	
@@ -59,20 +59,13 @@ public class Sala {
 
 	public void incluirSesion(String horaSesion) {
 		Sesion introducir = new Sesion(horaSesion, this.filas, this.columnas);
-		boolean aux = false;
-		if (this.sesiones.size() > 0) {
-			for (int i = 0; i < this.sesiones.size() && !aux; i++) {
-				if (this.sesiones.get(i).getHora().compareTo(horaSesion) < 0) {
-					this.sesiones.add(i+1, introducir);
-					aux = true;
-				} // fin de if
-			} // fin de for
-		} else {
-			this.sesiones.add(0, introducir);
-		}
-		
+		int i;
+		for (i=sesiones.size()-1; i>=0 && 
+				sesiones.get(i).getHora().compareTo(horaSesion) > 0; i--);
+		sesiones.add(i+1, introducir);
 	}
-
+		
+	
 	public void borrarSesion(String horaSesion) {
 		boolean aux = false;
 		for (int i = 0;i<this.sesiones.size() && !aux; i++) {
@@ -83,3 +76,4 @@ public class Sala {
 		}
 	}
 }
+
