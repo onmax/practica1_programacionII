@@ -10,6 +10,7 @@ public class Sala {
 	private int filas, columnas;
 	
 	//---------------CONSTRUCTOR---------------//
+	
 	public Sala(String pelicula, String[] horasSesiones, int filas, int columnas) {
 		this.pelicula = pelicula;
 		this.filas = filas;
@@ -17,7 +18,7 @@ public class Sala {
 		this.sesiones = new ArrayList<Sesion>();
 		for(int i=0; i<horasSesiones.length; i++){
 			incluirSesion(horasSesiones[i]);
-		}
+		}//Fin for
 	}
 	//---------------GETTERS---------------//
 	
@@ -29,7 +30,7 @@ public class Sala {
 		String[] horasSala = new String[this.sesiones.size()];
 		for (int i = 0; i < horasSala.length; i++) {
 			horasSala[i] = this.sesiones.get(i).getHora();
-		}
+		}//Fin for
 		return horasSala;
 	}
 
@@ -58,7 +59,7 @@ public class Sala {
 			return null;
 		}else{
 			return getPelicula() + "@" + num;
-		}
+		}//Fin else
 	}
 
 	
@@ -73,8 +74,7 @@ public class Sala {
 	public void incluirSesion(String horaSesion) {
 		Sesion introducir = new Sesion(horaSesion, this.filas, this.columnas);
 		int i;
-		for (i=sesiones.size()-1; i>=0 && 
-				sesiones.get(i).getHora().compareTo(horaSesion) > 0; i--);
+		for (i=sesiones.size()-1; i>=0 && sesiones.get(i).getHora().compareTo(horaSesion) > 0; i--);
 		sesiones.add(i+1, introducir);
 	}
 		
@@ -85,8 +85,9 @@ public class Sala {
 			if(this.sesiones.get(i).getHora().equals(horaSesion)){
 				this.sesiones.removeElementAt(i);
 				aux = true;
-			}
-		}
+			}//Fin if
+		}//Fin for
 	}
+	
 }
 
