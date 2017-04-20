@@ -3,10 +3,13 @@ package cine;
 import list.ArrayList;
 
 public class Sala {
+	//---------------ATRIBUTOS---------------//
+	
 	private String pelicula;
 	private ArrayList<Sesion> sesiones;
 	private int filas, columnas;
-
+	
+	//---------------CONSTRUCTOR---------------//
 	public Sala(String pelicula, String[] horasSesiones, int filas, int columnas) {
 		this.pelicula = pelicula;
 		this.filas = filas;
@@ -16,11 +19,8 @@ public class Sala {
 			incluirSesion(horasSesiones[i]);
 		}
 	}
+	//---------------GETTERS---------------//
 	
-	public void comprarEntrada(int sesion, int fila, int columna) {
-		this.sesiones.get(sesion - 1).comprarEntrada(fila, columna);	
-	}
-
 	public int getIdEntrada(int sesion, int fila, int columna) {
 		return this.sesiones.get(sesion - 1).getIdEntrada(fila, columna);
 	}
@@ -40,7 +40,18 @@ public class Sala {
 	public String getPelicula() {
 		return this.pelicula;
 	}
+	
+	public int getButacasDisponiblesSesion(int sesion) {
+		return this.sesiones.get(sesion - 1).getButacasDisponiblesSesion();
+	}
 
+	//---------------METODOS---------------//
+	
+	public void comprarEntrada(int sesion, int fila, int columna) {
+		this.sesiones.get(sesion - 1).comprarEntrada(fila, columna);	
+	}
+
+	
 	public String recogerEntradas(int id, int sesion) {
 		String num = this.sesiones.get(sesion - 1).recogerEntradas(id);
 		if(num == null){
@@ -50,10 +61,7 @@ public class Sala {
 		}
 	}
 
-	public int getButacasDisponiblesSesion(int sesion) {
-		return this.sesiones.get(sesion - 1).getButacasDisponiblesSesion();
-	}
-
+	
 	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sesion) {
 		return this.sesiones.get(sesion - 1).recomendarButacasContiguas(noButacas);
 	}
