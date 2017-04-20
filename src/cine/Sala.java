@@ -19,12 +19,13 @@ public class Sala {
 		for(int i=0; i<horasSesiones.length; i++){
 			incluirSesion(horasSesiones[i]);
 		}//Fin for
-	}
+	}//Fin metodo
+	
 	//---------------GETTERS---------------//
 	
 	public int getIdEntrada(int sesion, int fila, int columna) {
 		return this.sesiones.get(sesion - 1).getIdEntrada(fila, columna);
-	}
+	}//Fin metodo
 
 	public String[] getHorasDeSesionesDeSala() {
 		String[] horasSala = new String[this.sesiones.size()];
@@ -32,25 +33,25 @@ public class Sala {
 			horasSala[i] = this.sesiones.get(i).getHora();
 		}//Fin for
 		return horasSala;
-	}
+	}//Fin metodo
 
 	public char[][] getEstadoSesion(int sesion) {
 		return this.sesiones.get(sesion - 1).getEstadoSesion();
-	}
+	}//Fin metodo
 
 	public String getPelicula() {
 		return this.pelicula;
-	}
+	}//Fin metodo
 	
 	public int getButacasDisponiblesSesion(int sesion) {
 		return this.sesiones.get(sesion - 1).getButacasDisponiblesSesion();
-	}
+	}//Fin metodo
 
 	//---------------METODOS---------------//
 	
 	public void comprarEntrada(int sesion, int fila, int columna) {
 		this.sesiones.get(sesion - 1).comprarEntrada(fila, columna);	
-	}
+	}//Fin metodo
 
 	
 	public String recogerEntradas(int id, int sesion) {
@@ -60,23 +61,23 @@ public class Sala {
 		}else{
 			return getPelicula() + "@" + num;
 		}//Fin else
-	}
+	}//Fin metodo
 
 	
 	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sesion) {
 		return this.sesiones.get(sesion - 1).recomendarButacasContiguas(noButacas);
-	}
+	}//Fin metodo
 
 	public void comprarEntradasRecomendadas(int sesion, ButacasContiguas butacas) {
 		this.sesiones.get(sesion - 1).comprarEntradasRecomendadas(butacas);
-	}
+	}//Fin metodo
 
 	public void incluirSesion(String horaSesion) {
 		Sesion introducir = new Sesion(horaSesion, this.filas, this.columnas);
 		int i;
 		for (i=sesiones.size()-1; i>=0 && sesiones.get(i).getHora().compareTo(horaSesion) > 0; i--);
 		sesiones.add(i+1, introducir);
-	}
+	}//Fin metodo
 		
 	
 	public void borrarSesion(String horaSesion) {
@@ -87,6 +88,5 @@ public class Sala {
 				aux = true;
 			}//Fin if
 		}//Fin for
-	}
+	}//Fin metodo
 }
-
