@@ -35,6 +35,7 @@ public class Cine {
 	}
 
 	public String[] getHorasDeSesionesDeSala(int sala) {
+		
 		return this.salas[sala - 1].getHorasDeSesionesDeSala();
 	}
 
