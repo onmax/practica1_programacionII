@@ -11,36 +11,32 @@ import anotacion.Programacion2;
 
 
 public class Sesion {
+	
+	//---------------ATRIBUTOS---------------//
+	
 	private String hora;
 	private int asientosDisponibles;
 	private int sigIdCompra;
 	private int[][] estadoAsientos;
-
+	
+	//---------------CONSTRUCTOR---------------//
+	
 	public Sesion(String hora, int fila, int columnas) {
 		this.hora = hora;
 		this.estadoAsientos = new int[fila][columnas];
 		this.asientosDisponibles = fila * columnas;
 		this.sigIdCompra = 1;
-	}
+	}//Fin constructor
 
+	//---------------GETTERS---------------//
+	
 	public String getHora() {
 		return this.hora;
-	}
-
-	public boolean equals(Object object) {
-		Sesion sesion = (Sesion) object;
-		return sesion.getHora() == this.hora;
-	}
-
-	public void comprarEntrada(int fila, int columna) {
-		this.estadoAsientos[fila - 1][columna - 1] = this.sigIdCompra;
-		this.sigIdCompra++;
-		this.asientosDisponibles--;
-	}
-
+	}//Fin metodo
+	
 	public int getIdEntrada(int fila, int columna) {
 		return this.estadoAsientos[fila - 1][columna - 1];
-	}
+	}//Fin metodo
 
 	public char[][] getEstadoSesion() {
 		char res[][] = new char[this.estadoAsientos.length][this.estadoAsientos[0].length];
@@ -54,11 +50,24 @@ public class Sesion {
 			}//fin for
 		}//fin for
 		return res;
-	}//fin método
+	}//Fin metodo
 
 	public int getButacasDisponiblesSesion() {
 		return this.asientosDisponibles;
-	}
+	}//Fin metodo
+	
+	//---------------METODOS---------------//
+	
+	public boolean equals(Object object) {
+		Sesion sesion = (Sesion) object;
+		return sesion.getHora() == this.hora;
+	}//Fin metodo
+
+	public void comprarEntrada(int fila, int columna) {
+		this.estadoAsientos[fila - 1][columna - 1] = this.sigIdCompra;
+		this.sigIdCompra++;
+		this.asientosDisponibles--;
+	}//Fin metodo
 
 	public String recogerEntradas(int id) {
 		String res = this.getHora() + "+";
@@ -75,63 +84,74 @@ public class Sesion {
 			return null;
 		} else {
 			return res;
-		}
-	}
+		}//Fin else
+	}//Fin del metodo
 
 	public ButacasContiguas recomendarButacasContiguas(int noButacas) {
 		int puntero = (this.estadoAsientos.length+1) / 2 + 1;
-		if(puntero == this.estadoAsientos.length){
+		if(puntero == this.estadoAsientos.length){  
 			puntero = 1;
-		}
+		}//Fin if
 		int contador = 0;
 		boolean encontrado = false;
 		boolean signo = true;
 		int asientos;
 		ButacasContiguas butacas = null;
-		while(!encontrado && contador < this.estadoAsientos.length){
+		while(!encontrado && contador < this.estadoAsientos.length){ //Inicio while
 			asientos = noButacas;
-			for(int i = this.estadoAsientos[puntero].length - 1; !encontrado && i >= 0; i--){
-				if(this.estadoAsientos[puntero][i] == 0){
+			for(int i = this.estadoAsientos[puntero].length - 1; !encontrado && i >= 0; i--){ //Inicio for
+				
+				if(this.estadoAsientos[puntero][i] == 0){//Inicio if1
 					asientos --;
-				}else{
+				}//Fin if1
+				else{
 					asientos = noButacas;
-				}
-				if(asientos == 0){
+				}//Fin else
+				
+				if(asientos == 0){//inicio if2
 					butacas = new ButacasContiguas(puntero + 1, i + 1, noButacas);
 					encontrado = true;
-				}
-			}
+				}//Fin if2
+			}//Fin for
 			contador ++;
-			if(signo){
+			
+			if(signo){//Inicio if1
+				
 				if(puntero == this.estadoAsientos.length-1){
 					signo = false;
 					puntero = (this.estadoAsientos.length+1) / 2;
-				}
-				if(signo){
+				}//Fin if
+				
+				if(signo){//Inicio if2
 					puntero ++;
-				}
-			}else{
+				}//Fin if2
+				
+			}//Fin if1
+			
+			else{
 				puntero -= 1;
-			}
-		}
+			}//Fin else
+			
+		}//Fin while
 		
 		if(encontrado){
 			return butacas;
 		}else{
 			return null;
-		}
-	}
+		}//Fin else
+	}//Fin metodo
 
 	public void comprarEntradasRecomendadas(ButacasContiguas butacas) {
 		int fila = butacas.getFila();
 		int columna = butacas.getColumna();
 		int noButacas = butacas.getNoButacas();
-		while (noButacas > 0) {
+		while (noButacas > 0) {//Inicio while
 			this.estadoAsientos[fila - 1][columna - 1] = this.sigIdCompra;
 			columna++;
 			noButacas--;
 			this.asientosDisponibles--;
-		}
+		}//Fin while
+		
 		this.sigIdCompra++;
-	}
+	}//Fin metodo
 }
