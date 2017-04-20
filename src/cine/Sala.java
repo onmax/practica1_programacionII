@@ -42,7 +42,12 @@ public class Sala {
 	}
 
 	public String recogerEntradas(int id, int sesion) {
-		return getPelicula() + "@" + this.sesiones.get(sesion - 1).recogerEntradas(id);
+		String num = this.sesiones.get(sesion - 1).recogerEntradas(id);
+		if(num == null){
+			return null;
+		}else{
+			return getPelicula() + "@" + num;
+		}
 	}
 
 	public int getButacasDisponiblesSesion(int sesion) {
