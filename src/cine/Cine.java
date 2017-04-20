@@ -25,7 +25,7 @@ public class Cine {
 	
 	public int getIdEntrada(int sala, int sesion, int fila, int columna) {
 		return this.salas[sala - 1].getIdEntrada(sesion, fila, columna);
-	}
+	}//Fin metodo
 
 	public String[] getPeliculas() {
 		String[] aux = new String[this.salas.length];
@@ -33,26 +33,26 @@ public class Cine {
 			aux[i] = this.salas[i].getPelicula();
 		}//Fin for
 		return aux;
-	}
+	}//Fin metodo
 
 	public String[] getHorasDeSesionesDeSala(int sala) {
 		
 		return this.salas[sala - 1].getHorasDeSesionesDeSala();
-	}
+	}//Fin metodo
 
 	public char[][] getEstadoSesion(int sala, int sesion) {
 		return this.salas[sala - 1].getEstadoSesion(sesion);
-	}
+	}//Fin metodo
 
 	public int getButacasDisponiblesSesion(int sala, int sesion) {
 		return this.salas[sala - 1].getButacasDisponiblesSesion(sesion);
-	}
+	}//Fin metodo
 	
 	//---------------METODOS---------------//
 	
 	public void comprarEntrada(int sala, int sesion, int fila, int columna) {
 		this.salas[sala - 1].comprarEntrada(sesion, fila, columna);
-	}
+	}//Fin metodo
 
 	public String recogerEntradas(int id, int sala, int sesion) {
 		String info = this.salas[sala - 1].recogerEntradas(id, sesion);
@@ -61,21 +61,22 @@ public class Cine {
 		} else {
 			return null;
 		}//Fin else
-	}
+	}//Fin metodo
 
 	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sala, int sesion) {
 		return this.salas[sala - 1].recomendarButacasContiguas(noButacas, sesion);
-	}
+	}//Fin metodo
 
 	public void comprarEntradasRecomendadas(int sala, int sesion, ButacasContiguas butacas) {
 		this.salas[sala - 1].comprarEntradasRecomendadas(sesion, butacas);
-	}
+	}//Fin metodo
 
 	public void incluirSesion(int sala, String horaSesion) {
 		this.salas[sala - 1].incluirSesion(horaSesion);
-	}
+	}//Fin metodo
 
 	public void borrarSesion(int sala, String horaSesion) {
 		this.salas[sala - 1].borrarSesion(horaSesion);
-	}
+	}//Fin metodo
+	
 }
