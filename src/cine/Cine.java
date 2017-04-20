@@ -10,18 +10,19 @@ import anotacion.Programacion2;
 	)
 
 public class Cine {
+	//---------------ATRIBUTOS---------------//
+	
 	private String nombre;
 	private Sala[] salas;
-
+	
+	//---------------CONSTRUCTOR---------------//
 	public Cine(String nombre, Sala[] salas) {
 		this.nombre = nombre;
 		this.salas = salas;
 	}
-
-	public void comprarEntrada(int sala, int sesion, int fila, int columna) {
-		this.salas[sala - 1].comprarEntrada(sesion, fila, columna);
-	}
-
+	
+	//---------------GETTERS---------------//
+	
 	public int getIdEntrada(int sala, int sesion, int fila, int columna) {
 		return this.salas[sala - 1].getIdEntrada(sesion, fila, columna);
 	}
@@ -30,7 +31,7 @@ public class Cine {
 		String[] aux = new String[this.salas.length];
 		for (int i = 0; i < this.salas.length; i++) {
 			aux[i] = this.salas[i].getPelicula();
-		}
+		}//Fin for
 		return aux;
 	}
 
@@ -46,6 +47,12 @@ public class Cine {
 	public int getButacasDisponiblesSesion(int sala, int sesion) {
 		return this.salas[sala - 1].getButacasDisponiblesSesion(sesion);
 	}
+	
+	//---------------METODOS---------------//
+	
+	public void comprarEntrada(int sala, int sesion, int fila, int columna) {
+		this.salas[sala - 1].comprarEntrada(sesion, fila, columna);
+	}
 
 	public String recogerEntradas(int id, int sala, int sesion) {
 		String info = this.salas[sala - 1].recogerEntradas(id, sesion);
@@ -53,7 +60,7 @@ public class Cine {
 			return this.nombre + "@" + info;
 		} else {
 			return null;
-		}
+		}//Fin else
 	}
 
 	public ButacasContiguas recomendarButacasContiguas(int noButacas, int sala, int sesion) {
