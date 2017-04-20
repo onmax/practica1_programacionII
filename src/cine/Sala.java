@@ -88,6 +88,5 @@ public class Sala {
 			}//Fin if
 		}//Fin for
 	}
-	
 }
 
