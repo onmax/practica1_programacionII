@@ -67,7 +67,7 @@ public class Sesion {
 			for (int j = 0; j < this.estadoAsientos[i].length; j++) {
 				if (this.estadoAsientos[i][j] == id) {
 					bool = true;
-					res += "fila" + (i + 1) + ",columna" + (j + 1) + "+";
+					res += (i + 1) + "," + (j + 1) + "+";
 				}//fin de if
 			}//fin de for
 		}//fin de for
