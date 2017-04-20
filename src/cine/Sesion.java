@@ -81,7 +81,7 @@ public class Sesion {
 	public ButacasContiguas recomendarButacasContiguas(int noButacas) {
 		int puntero = (this.estadoAsientos.length+1) / 2 + 1;
 		if(puntero == this.estadoAsientos.length){
-			puntero --;
+			puntero = 1;
 		}
 		int contador = 0;
 		boolean encontrado = false;
